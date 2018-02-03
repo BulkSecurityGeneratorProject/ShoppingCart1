@@ -1,0 +1,36 @@
+
+<div *ngIf="cart">
+    <h2><span>Cart</span> {{cart.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{cart.title}}</span>
+        </dd>
+        <dt><span>Restricted</span></dt>
+        <dd>
+            <span>{{cart.restricted}}</span>
+        </dd>
+        <dt><span>Customer</span></dt>
+        <dd>
+            <div *ngIf="cart.customer">
+                <a [routerLink]="['/customer', cart.customer?.id]">{{cart.customer?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'cart/'+ cart.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
