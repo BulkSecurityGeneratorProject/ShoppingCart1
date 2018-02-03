@@ -1,6 +1,6 @@
 package com.jackson.shoppingcart.config;
 
-import io.github.jhipster.config.JHipsterConstants;
+import com.jackson.shoppingcart.config.ShoppingCartConstants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.*;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile(JHipsterConstants.SPRING_PROFILE_CLOUD)
+@Profile(ShoppingCartConstants.SPRING_PROFILE_CLOUD)
 public class CloudDatabaseConfiguration extends AbstractCloudConfig {
 
     private final Logger log = LoggerFactory.getLogger(CloudDatabaseConfiguration.class);

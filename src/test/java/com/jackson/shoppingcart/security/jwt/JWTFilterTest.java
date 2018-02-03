@@ -1,7 +1,7 @@
 package com.jackson.shoppingcart.security.jwt;
 
 import com.jackson.shoppingcart.security.AuthoritiesConstants;
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -25,8 +25,8 @@ public class JWTFilterTest {
 
     @Before
     public void setup() {
-        JHipsterProperties jHipsterProperties = new JHipsterProperties();
-        tokenProvider = new TokenProvider(jHipsterProperties);
+        ApplicationProperties applicationProperties = new ApplicationProperties();
+        tokenProvider = new TokenProvider(applicationProperties);
         ReflectionTestUtils.setField(tokenProvider, "secretKey", "test secret");
         ReflectionTestUtils.setField(tokenProvider, "tokenValidityInMilliseconds", 60000);
         jwtFilter = new JWTFilter(tokenProvider);

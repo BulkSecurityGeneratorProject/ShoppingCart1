@@ -1,7 +1,7 @@
 package com.jackson.shoppingcart.config;
 
 import io.github.jhipster.async.ExceptionHandlingAsyncTaskExecutor;
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +21,10 @@ public class AsyncConfiguration implements AsyncConfigurer {
 
     private final Logger log = LoggerFactory.getLogger(AsyncConfiguration.class);
 
-    private final JHipsterProperties jHipsterProperties;
+    private final ApplicationProperties applicationProperties;
 
-    public AsyncConfiguration(JHipsterProperties jHipsterProperties) {
-        this.jHipsterProperties = jHipsterProperties;
+    public AsyncConfiguration(ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
     }
 
     @Override
@@ -32,9 +32,9 @@ public class AsyncConfiguration implements AsyncConfigurer {
     public Executor getAsyncExecutor() {
         log.debug("Creating Async Task Executor");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(jHipsterProperties.getAsync().getCorePoolSize());
-        executor.setMaxPoolSize(jHipsterProperties.getAsync().getMaxPoolSize());
-        executor.setQueueCapacity(jHipsterProperties.getAsync().getQueueCapacity());
+        executor.setCorePoolSize(applicationProperties.getAsync().getCorePoolSize());
+        executor.setMaxPoolSize(applicationProperties.getAsync().getMaxPoolSize());
+        executor.setQueueCapacity(applicationProperties.getAsync().getQueueCapacity());
         executor.setThreadNamePrefix("shopping-cart-Executor-");
         return new ExceptionHandlingAsyncTaskExecutor(executor);
     }

@@ -1,6 +1,6 @@
 package com.jackson.shoppingcart.config;
 
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;
 import org.ehcache.expiry.Duration;
@@ -23,9 +23,9 @@ public class CacheConfiguration {
 
     private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
-    public CacheConfiguration(JHipsterProperties jHipsterProperties) {
-        JHipsterProperties.Cache.Ehcache ehcache =
-            jHipsterProperties.getCache().getEhcache();
+    public CacheConfiguration(ApplicationProperties applicationProperties) {
+        ApplicationProperties.Cache.Ehcache ehcache =
+            applicationProperties.getCache().getEhcache();
 
         jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
             CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class,

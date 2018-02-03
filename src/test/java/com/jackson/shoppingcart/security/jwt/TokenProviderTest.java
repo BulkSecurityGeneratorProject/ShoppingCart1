@@ -1,7 +1,7 @@
 package com.jackson.shoppingcart.security.jwt;
 
 import com.jackson.shoppingcart.security.AuthoritiesConstants;
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.Before;
@@ -23,13 +23,13 @@ public class TokenProviderTest {
 
     private final String secretKey = "e5c9ee274ae87bc031adda32e27fa98b9290da83";
     private final long ONE_MINUTE = 60000;
-    private JHipsterProperties jHipsterProperties;
+    private ApplicationProperties applicationProperties;
     private TokenProvider tokenProvider;
 
     @Before
     public void setup() {
-        jHipsterProperties = Mockito.mock(JHipsterProperties.class);
-        tokenProvider = new TokenProvider(jHipsterProperties);
+        applicationProperties = Mockito.mock(ApplicationProperties.class);
+        tokenProvider = new TokenProvider(applicationProperties);
         ReflectionTestUtils.setField(tokenProvider, "secretKey", secretKey);
         ReflectionTestUtils.setField(tokenProvider, "tokenValidityInMilliseconds", ONE_MINUTE);
     }

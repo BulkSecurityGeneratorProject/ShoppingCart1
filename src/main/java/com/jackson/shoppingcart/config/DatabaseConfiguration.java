@@ -1,6 +1,6 @@
 package com.jackson.shoppingcart.config;
 
-import io.github.jhipster.config.JHipsterConstants;
+import com.jackson.shoppingcart.config.ShoppingCartConstants;
 import io.github.jhipster.config.liquibase.AsyncSpringLiquibase;
 
 import liquibase.integration.spring.SpringLiquibase;
@@ -44,7 +44,7 @@ public class DatabaseConfiguration {
         liquibase.setContexts(liquibaseProperties.getContexts());
         liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());
         liquibase.setDropFirst(liquibaseProperties.isDropFirst());
-        if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_NO_LIQUIBASE)) {
+        if (env.acceptsProfiles(ShoppingCartConstants.SPRING_PROFILE_NO_LIQUIBASE)) {
             liquibase.setShouldRun(false);
         } else {
             liquibase.setShouldRun(liquibaseProperties.isEnabled());

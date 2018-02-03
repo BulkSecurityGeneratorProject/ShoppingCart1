@@ -3,9 +3,9 @@ package com.jackson.shoppingcart.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
-import io.github.jhipster.config.JHipsterConstants;
-import io.github.jhipster.config.JHipsterProperties;
-import io.github.jhipster.web.filter.CachingHttpHeadersFilter;
+import com.jackson.shoppingcart.config.ShoppingCartConstants;
+import com.jackson.shoppingcart.config.ApplicationProperties;
+import com.jackson.shoppingcart.config.CachingHttpHeadersFilter;
 import io.undertow.Undertow;
 import io.undertow.Undertow.Builder;
 import io.undertow.UndertowOptions;
@@ -46,7 +46,7 @@ public class WebConfigurerTest {
 
     private MockEnvironment env;
 
-    private JHipsterProperties props;
+    private ApplicationProperties props;
 
     private MetricRegistry metricRegistry;
 
@@ -59,7 +59,7 @@ public class WebConfigurerTest {
             .when(servletContext).addServlet(anyString(), any(Servlet.class));
 
         env = new MockEnvironment();
-        props = new JHipsterProperties();
+        props = new ApplicationProperties();
 
         webConfigurer = new WebConfigurer(env, props);
         metricRegistry = new MetricRegistry();
@@ -68,7 +68,7 @@ public class WebConfigurerTest {
 
     @Test
     public void testStartUpProdServletContext() throws ServletException {
-        env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION);
+        env.setActiveProfiles(ShoppingCartConstants.SPRING_PROFILE_PRODUCTION);
         webConfigurer.onStartup(servletContext);
 
         assertThat(servletContext.getAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE)).isEqualTo(metricRegistry);
@@ -80,7 +80,7 @@ public class WebConfigurerTest {
 
     @Test
     public void testStartUpDevServletContext() throws ServletException {
-        env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT);
+        env.setActiveProfiles(ShoppingCartConstants.SPRING_PROFILE_DEVELOPMENT);
         webConfigurer.onStartup(servletContext);
 
         assertThat(servletContext.getAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE)).isEqualTo(metricRegistry);
@@ -92,7 +92,7 @@ public class WebConfigurerTest {
 
     @Test
     public void testCustomizeServletContainer() {
-        env.setActiveProfiles(JHipsterConstants.SPRING_PROFILE_PRODUCTION);
+        env.setActiveProfiles(ShoppingCartConstants.SPRING_PROFILE_PRODUCTION);
         UndertowEmbeddedServletContainerFactory container = new UndertowEmbeddedServletContainerFactory();
         webConfigurer.customize(container);
         assertThat(container.getMimeMappings().get("abs")).isEqualTo("audio/x-mpeg");
@@ -110,7 +110,7 @@ public class WebConfigurerTest {
 
     @Test
     public void testUndertowHttp2Enabled() {
-        props.getHttp().setVersion(JHipsterProperties.Http.Version.V_2_0);
+        props.getHttp().setVersion(ApplicationProperties.Http.Version.V_2_0);
         UndertowEmbeddedServletContainerFactory container = new UndertowEmbeddedServletContainerFactory();
         webConfigurer.customize(container);
         Builder builder = Undertow.builder();

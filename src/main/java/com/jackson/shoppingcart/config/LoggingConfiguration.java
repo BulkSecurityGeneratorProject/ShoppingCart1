@@ -3,7 +3,7 @@ package com.jackson.shoppingcart.config;
 import java.net.InetSocketAddress;
 import java.util.Iterator;
 
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.Level;
@@ -38,18 +38,18 @@ public class LoggingConfiguration {
 
     private final String serverPort;
 
-    private final JHipsterProperties jHipsterProperties;
+    private final ApplicationProperties applicationProperties;
 
     public LoggingConfiguration(@Value("${spring.application.name}") String appName, @Value("${server.port}") String serverPort,
-         JHipsterProperties jHipsterProperties) {
+         ApplicationProperties applicationProperties) {
         this.appName = appName;
         this.serverPort = serverPort;
-        this.jHipsterProperties = jHipsterProperties;
-        if (jHipsterProperties.getLogging().getLogstash().isEnabled()) {
+        this.applicationProperties = applicationProperties;
+        if (applicationProperties.getLogging().getLogstash().isEnabled()) {
             addLogstashAppender(context);
             addContextListener(context);
         }
-        if (jHipsterProperties.getMetrics().getLogs().isEnabled()) {
+        if (applicationProperties.getMetrics().getLogs().isEnabled()) {
             setMetricsMarkerLogbackFilter(context);
         }
     }
@@ -73,7 +73,7 @@ public class LoggingConfiguration {
         // Set the Logstash appender config from JHipster properties
         logstashEncoder.setCustomFields(customFields);
         // Set the Logstash appender config from JHipster properties
-        logstashAppender.addDestinations(new InetSocketAddress(jHipsterProperties.getLogging().getLogstash().getHost(),jHipsterProperties.getLogging().getLogstash().getPort()));
+        logstashAppender.addDestinations(new InetSocketAddress(applicationProperties.getLogging().getLogstash().getHost(),applicationProperties.getLogging().getLogstash().getPort()));
 
         ShortenedThrowableConverter throwableConverter = new ShortenedThrowableConverter();
         throwableConverter.setRootCauseFirst(true);
@@ -87,7 +87,7 @@ public class LoggingConfiguration {
         AsyncAppender asyncLogstashAppender = new AsyncAppender();
         asyncLogstashAppender.setContext(context);
         asyncLogstashAppender.setName(ASYNC_LOGSTASH_APPENDER_NAME);
-        asyncLogstashAppender.setQueueSize(jHipsterProperties.getLogging().getLogstash().getQueueSize());
+        asyncLogstashAppender.setQueueSize(applicationProperties.getLogging().getLogstash().getQueueSize());
         asyncLogstashAppender.addAppender(logstashAppender);
         asyncLogstashAppender.start();
 

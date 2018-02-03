@@ -1,6 +1,6 @@
 package com.jackson.shoppingcart.config;
 
-import io.github.jhipster.config.JHipsterConstants;
+import com.jackson.shoppingcart.config.ShoppingCartConstants;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.env.Environment;
@@ -31,7 +31,7 @@ public final class DefaultProfileUtil {
         * This cannot be set in the <code>application.yml</code> file.
         * See https://github.com/spring-projects/spring-boot/issues/1219
         */
-        defProperties.put(SPRING_PROFILE_DEFAULT, JHipsterConstants.SPRING_PROFILE_DEVELOPMENT);
+        defProperties.put(SPRING_PROFILE_DEFAULT, ShoppingCartConstants.SPRING_PROFILE_DEVELOPMENT);
         app.setDefaultProperties(defProperties);
     }
 

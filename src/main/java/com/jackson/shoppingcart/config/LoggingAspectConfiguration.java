@@ -2,7 +2,7 @@ package com.jackson.shoppingcart.config;
 
 import com.jackson.shoppingcart.aop.logging.LoggingAspect;
 
-import io.github.jhipster.config.JHipsterConstants;
+import com.jackson.shoppingcart.config.ShoppingCartConstants;
 
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -12,7 +12,7 @@ import org.springframework.core.env.Environment;
 public class LoggingAspectConfiguration {
 
     @Bean
-    @Profile(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT)
+    @Profile(ShoppingCartConstants.SPRING_PROFILE_DEVELOPMENT)
     public LoggingAspect loggingAspect(Environment env) {
         return new LoggingAspect(env);
     }

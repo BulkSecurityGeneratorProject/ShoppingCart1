@@ -1,6 +1,6 @@
 package com.jackson.shoppingcart.config;
 
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -16,56 +16,56 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 
 public class ApplicationProperties {
-        private final io.github.jhipster.config.JHipsterProperties.Async async = new io.github.jhipster.config.JHipsterProperties.Async();
-        private final io.github.jhipster.config.JHipsterProperties.Http http = new io.github.jhipster.config.JHipsterProperties.Http();
-        private final io.github.jhipster.config.JHipsterProperties.Cache cache = new io.github.jhipster.config.JHipsterProperties.Cache();
-        private final io.github.jhipster.config.JHipsterProperties.Mail mail = new io.github.jhipster.config.JHipsterProperties.Mail();
-        private final io.github.jhipster.config.JHipsterProperties.Security security = new io.github.jhipster.config.JHipsterProperties.Security();
-        private final io.github.jhipster.config.JHipsterProperties.Swagger swagger = new io.github.jhipster.config.JHipsterProperties.Swagger();
-        private final io.github.jhipster.config.JHipsterProperties.Metrics metrics = new io.github.jhipster.config.JHipsterProperties.Metrics();
-        private final io.github.jhipster.config.JHipsterProperties.Logging logging = new io.github.jhipster.config.JHipsterProperties.Logging();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Async async = new com.jackson.shoppingcart.config.ApplicationProperties.Async();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Http http = new com.jackson.shoppingcart.config.ApplicationProperties.Http();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Cache cache = new com.jackson.shoppingcart.config.ApplicationProperties.Cache();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Mail mail = new com.jackson.shoppingcart.config.ApplicationProperties.Mail();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Security security = new com.jackson.shoppingcart.config.ApplicationProperties.Security();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Swagger swagger = new com.jackson.shoppingcart.config.ApplicationProperties.Swagger();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Metrics metrics = new com.jackson.shoppingcart.config.ApplicationProperties.Metrics();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Logging logging = new com.jackson.shoppingcart.config.ApplicationProperties.Logging();
         private final CorsConfiguration cors = new CorsConfiguration();
-        private final io.github.jhipster.config.JHipsterProperties.Social social = new io.github.jhipster.config.JHipsterProperties.Social();
-        private final io.github.jhipster.config.JHipsterProperties.Gateway gateway = new io.github.jhipster.config.JHipsterProperties.Gateway();
-        private final io.github.jhipster.config.JHipsterProperties.Ribbon ribbon = new io.github.jhipster.config.JHipsterProperties.Ribbon();
-        private final io.github.jhipster.config.JHipsterProperties.Registry registry = new io.github.jhipster.config.JHipsterProperties.Registry();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Social social = new com.jackson.shoppingcart.config.ApplicationProperties.Social();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Gateway gateway = new com.jackson.shoppingcart.config.ApplicationProperties.Gateway();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Ribbon ribbon = new com.jackson.shoppingcart.config.ApplicationProperties.Ribbon();
+        private final com.jackson.shoppingcart.config.ApplicationProperties.Registry registry = new com.jackson.shoppingcart.config.ApplicationProperties.Registry();
 
         public ApplicationProperties() {
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Async getAsync() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Async getAsync() {
             return this.async;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Http getHttp() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Http getHttp() {
             return this.http;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Cache getCache() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Cache getCache() {
             return this.cache;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Mail getMail() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Mail getMail() {
             return this.mail;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Registry getRegistry() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Registry getRegistry() {
             return this.registry;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Security getSecurity() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Security getSecurity() {
             return this.security;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Swagger getSwagger() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Swagger getSwagger() {
             return this.swagger;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Metrics getMetrics() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Metrics getMetrics() {
             return this.metrics;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Logging getLogging() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Logging getLogging() {
             return this.logging;
         }
 
@@ -73,15 +73,15 @@ public class ApplicationProperties {
             return this.cors;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Social getSocial() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Social getSocial() {
             return this.social;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Gateway getGateway() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Gateway getGateway() {
             return this.gateway;
         }
 
-        public io.github.jhipster.config.JHipsterProperties.Ribbon getRibbon() {
+        public com.jackson.shoppingcart.config.ApplicationProperties.Ribbon getRibbon() {
             return this.ribbon;
         }
 
@@ -118,14 +118,14 @@ public class ApplicationProperties {
         }
 
         public static class Gateway {
-            private final io.github.jhipster.config.JHipsterProperties.Gateway.RateLimiting rateLimiting = new io.github.jhipster.config.JHipsterProperties.Gateway.RateLimiting();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Gateway.RateLimiting rateLimiting = new com.jackson.shoppingcart.config.ApplicationProperties.Gateway.RateLimiting();
             private Map<String, List<String>> authorizedMicroservicesEndpoints;
 
             public Gateway() {
                 this.authorizedMicroservicesEndpoints = io.github.jhipster.config.JHipsterDefaults.Gateway.authorizedMicroservicesEndpoints;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Gateway.RateLimiting getRateLimiting() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Gateway.RateLimiting getRateLimiting() {
                 return this.rateLimiting;
             }
 
@@ -187,17 +187,17 @@ public class ApplicationProperties {
         }
 
         public static class Logging {
-            private final io.github.jhipster.config.JHipsterProperties.Logging.Logstash logstash = new io.github.jhipster.config.JHipsterProperties.Logging.Logstash();
-            private final io.github.jhipster.config.JHipsterProperties.Logging.SpectatorMetrics spectatorMetrics = new io.github.jhipster.config.JHipsterProperties.Logging.SpectatorMetrics();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Logging.Logstash logstash = new com.jackson.shoppingcart.config.ApplicationProperties.Logging.Logstash();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Logging.SpectatorMetrics spectatorMetrics = new com.jackson.shoppingcart.config.ApplicationProperties.Logging.SpectatorMetrics();
 
             public Logging() {
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Logging.Logstash getLogstash() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Logging.Logstash getLogstash() {
                 return this.logstash;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Logging.SpectatorMetrics getSpectatorMetrics() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Logging.SpectatorMetrics getSpectatorMetrics() {
                 return this.spectatorMetrics;
             }
 
@@ -260,27 +260,27 @@ public class ApplicationProperties {
         }
 
         public static class Metrics {
-            private final io.github.jhipster.config.JHipsterProperties.Metrics.Jmx jmx = new io.github.jhipster.config.JHipsterProperties.Metrics.Jmx();
-            private final io.github.jhipster.config.JHipsterProperties.Metrics.Graphite graphite = new io.github.jhipster.config.JHipsterProperties.Metrics.Graphite();
-            private final io.github.jhipster.config.JHipsterProperties.Metrics.Prometheus prometheus = new io.github.jhipster.config.JHipsterProperties.Metrics.Prometheus();
-            private final io.github.jhipster.config.JHipsterProperties.Metrics.Logs logs = new io.github.jhipster.config.JHipsterProperties.Metrics.Logs();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Jmx jmx = new com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Jmx();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Graphite graphite = new com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Graphite();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Prometheus prometheus = new com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Prometheus();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Logs logs = new com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Logs();
 
             public Metrics() {
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Metrics.Jmx getJmx() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Jmx getJmx() {
                 return this.jmx;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Metrics.Graphite getGraphite() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Graphite getGraphite() {
                 return this.graphite;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Metrics.Prometheus getPrometheus() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Prometheus getPrometheus() {
                 return this.prometheus;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Metrics.Logs getLogs() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Metrics.Logs getLogs() {
                 return this.logs;
             }
 
@@ -514,22 +514,22 @@ public class ApplicationProperties {
         }
 
         public static class Security {
-            private final io.github.jhipster.config.JHipsterProperties.Security.ClientAuthorization clientAuthorization = new io.github.jhipster.config.JHipsterProperties.Security.ClientAuthorization();
-            private final io.github.jhipster.config.JHipsterProperties.Security.Authentication authentication = new io.github.jhipster.config.JHipsterProperties.Security.Authentication();
-            private final io.github.jhipster.config.JHipsterProperties.Security.RememberMe rememberMe = new io.github.jhipster.config.JHipsterProperties.Security.RememberMe();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Security.ClientAuthorization clientAuthorization = new com.jackson.shoppingcart.config.ApplicationProperties.Security.ClientAuthorization();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Security.Authentication authentication = new com.jackson.shoppingcart.config.ApplicationProperties.Security.Authentication();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Security.RememberMe rememberMe = new com.jackson.shoppingcart.config.ApplicationProperties.Security.RememberMe();
 
             public Security() {
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Security.ClientAuthorization getClientAuthorization() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Security.ClientAuthorization getClientAuthorization() {
                 return this.clientAuthorization;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Security.Authentication getAuthentication() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Security.Authentication getAuthentication() {
                 return this.authentication;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Security.RememberMe getRememberMe() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Security.RememberMe getRememberMe() {
                 return this.rememberMe;
             }
 
@@ -551,12 +551,12 @@ public class ApplicationProperties {
             }
 
             public static class Authentication {
-                private final io.github.jhipster.config.JHipsterProperties.Security.Authentication.Jwt jwt = new io.github.jhipster.config.JHipsterProperties.Security.Authentication.Jwt();
+                private final com.jackson.shoppingcart.config.ApplicationProperties.Security.Authentication.Jwt jwt = new com.jackson.shoppingcart.config.ApplicationProperties.Security.Authentication.Jwt();
 
                 public Authentication() {
                 }
 
-                public io.github.jhipster.config.JHipsterProperties.Security.Authentication.Jwt getJwt() {
+                public com.jackson.shoppingcart.config.ApplicationProperties.Security.Authentication.Jwt getJwt() {
                     return this.jwt;
                 }
 
@@ -669,31 +669,31 @@ public class ApplicationProperties {
         }
 
         public static class Cache {
-            private final io.github.jhipster.config.JHipsterProperties.Cache.Hazelcast hazelcast = new io.github.jhipster.config.JHipsterProperties.Cache.Hazelcast();
-            private final io.github.jhipster.config.JHipsterProperties.Cache.Ehcache ehcache = new io.github.jhipster.config.JHipsterProperties.Cache.Ehcache();
-            private final io.github.jhipster.config.JHipsterProperties.Cache.Infinispan infinispan = new io.github.jhipster.config.JHipsterProperties.Cache.Infinispan();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Cache.Hazelcast hazelcast = new com.jackson.shoppingcart.config.ApplicationProperties.Cache.Hazelcast();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Cache.Ehcache ehcache = new com.jackson.shoppingcart.config.ApplicationProperties.Cache.Ehcache();
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan infinispan = new com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan();
 
             public Cache() {
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Cache.Hazelcast getHazelcast() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Cache.Hazelcast getHazelcast() {
                 return this.hazelcast;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Cache.Ehcache getEhcache() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Cache.Ehcache getEhcache() {
                 return this.ehcache;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Cache.Infinispan getInfinispan() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan getInfinispan() {
                 return this.infinispan;
             }
 
             public static class Infinispan {
                 private String configFile = "default-configs/default-jgroups-tcp.xml";
                 private boolean statsEnabled = false;
-                private final io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Local local = new io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Local();
-                private final io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Distributed distributed = new io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Distributed();
-                private final io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Replicated replicated = new io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Replicated();
+                private final com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Local local = new com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Local();
+                private final com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Distributed distributed = new com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Distributed();
+                private final com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Replicated replicated = new com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Replicated();
 
                 public Infinispan() {
                 }
@@ -714,15 +714,15 @@ public class ApplicationProperties {
                     this.statsEnabled = statsEnabled;
                 }
 
-                public io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Local getLocal() {
+                public com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Local getLocal() {
                     return this.local;
                 }
 
-                public io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Distributed getDistributed() {
+                public com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Distributed getDistributed() {
                     return this.distributed;
                 }
 
-                public io.github.jhipster.config.JHipsterProperties.Cache.Infinispan.Replicated getReplicated() {
+                public com.jackson.shoppingcart.config.ApplicationProperties.Cache.Infinispan.Replicated getReplicated() {
                     return this.replicated;
                 }
 
@@ -835,12 +835,12 @@ public class ApplicationProperties {
             public static class Hazelcast {
                 private int timeToLiveSeconds = 3600;
                 private int backupCount = 1;
-                private final io.github.jhipster.config.JHipsterProperties.Cache.Hazelcast.ManagementCenter managementCenter = new io.github.jhipster.config.JHipsterProperties.Cache.Hazelcast.ManagementCenter();
+                private final com.jackson.shoppingcart.config.ApplicationProperties.Cache.Hazelcast.ManagementCenter managementCenter = new com.jackson.shoppingcart.config.ApplicationProperties.Cache.Hazelcast.ManagementCenter();
 
                 public Hazelcast() {
                 }
 
-                public io.github.jhipster.config.JHipsterProperties.Cache.Hazelcast.ManagementCenter getManagementCenter() {
+                public com.jackson.shoppingcart.config.ApplicationProperties.Cache.Hazelcast.ManagementCenter getManagementCenter() {
                     return this.managementCenter;
                 }
 
@@ -896,22 +896,22 @@ public class ApplicationProperties {
         }
 
         public static class Http {
-            private final io.github.jhipster.config.JHipsterProperties.Http.Cache cache = new io.github.jhipster.config.JHipsterProperties.Http.Cache();
-            public io.github.jhipster.config.JHipsterProperties.Http.Version version;
+            private final com.jackson.shoppingcart.config.ApplicationProperties.Http.Cache cache = new com.jackson.shoppingcart.config.ApplicationProperties.Http.Cache();
+            public com.jackson.shoppingcart.config.ApplicationProperties.Http.Version version;
 
             public Http() {
-                this.version = io.github.jhipster.config.JHipsterDefaults.Http.version;
+                this.version = com.jackson.shoppingcart.config.ApplicationDefaults.Http.version;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Http.Cache getCache() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Http.Cache getCache() {
                 return this.cache;
             }
 
-            public io.github.jhipster.config.JHipsterProperties.Http.Version getVersion() {
+            public com.jackson.shoppingcart.config.ApplicationProperties.Http.Version getVersion() {
                 return this.version;
             }
 
-            public void setVersion(io.github.jhipster.config.JHipsterProperties.Http.Version version) {
+            public void setVersion(com.jackson.shoppingcart.config.ApplicationProperties.Http.Version version) {
                 this.version = version;
             }
 

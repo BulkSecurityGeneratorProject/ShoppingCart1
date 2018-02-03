@@ -3,7 +3,7 @@ import com.jackson.shoppingcart.config.Constants;
 
 import com.jackson.shoppingcart.ShoppingCartApp;
 import com.jackson.shoppingcart.domain.User;
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
 public class MailServiceIntTest {
 
     @Autowired
-    private JHipsterProperties jHipsterProperties;
+    private ApplicationProperties applicationProperties;
 
     @Autowired
     private MessageSource messageSource;
@@ -54,7 +54,7 @@ public class MailServiceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         doNothing().when(javaMailSender).send(any(MimeMessage.class));
-        mailService = new MailService(jHipsterProperties, javaMailSender, messageSource, templateEngine);
+        mailService = new MailService(applicationProperties, javaMailSender, messageSource, templateEngine);
     }
 
     @Test
