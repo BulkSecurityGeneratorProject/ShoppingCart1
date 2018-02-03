@@ -62,12 +62,12 @@ info:
         version: #project.version#
 
 # ===================================================================
-# JHipster specific properties
+# Application specific properties
 #
 # Full reference is available at: http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-jhipster:
+application:
     async:
         core-pool-size: 2
         max-pool-size: 50
@@ -105,4 +105,3 @@ jhipster:
 # http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-application:

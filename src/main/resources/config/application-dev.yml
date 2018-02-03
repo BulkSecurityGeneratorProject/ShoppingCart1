@@ -85,12 +85,12 @@ server:
     port: 8080
 
 # ===================================================================
-# JHipster specific properties
+# Application specific properties
 #
 # Full reference is available at: http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-jhipster:
+application:
     http:
         version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
     cache: # Cache configuration
@@ -112,7 +112,7 @@ jhipster:
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
-    mail: # specific JHipster mail property, for standard properties see MailProperties
+    mail: # specific Application mail property, for standard properties see MailProperties
         from: ShoppingCart@localhost
         base-url: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
@@ -145,4 +145,3 @@ jhipster:
 # http://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-application:

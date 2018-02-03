@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ShoppingCartSharedModule } from '../shared';
-/* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
+/* jhipster-needle-add-admin-module-import - Application will add admin modules imports here */
 
 import {
     adminState,
@@ -34,7 +34,7 @@ import {
     imports: [
         ShoppingCartSharedModule,
         RouterModule.forChild(adminState),
-        /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
+        /* jhipster-needle-add-admin-module - Application will add admin modules here */
     ],
     declarations: [
         AuditsComponent,

@@ -41,7 +41,7 @@ public class Cart implements Serializable {
     @ManyToOne
     private Customer customer;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // application-needle-entity-add-field - Application will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -113,7 +113,7 @@ public class Cart implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // application-needle-entity-add-getters-setters - Application will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

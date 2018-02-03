@@ -55,7 +55,7 @@ public class Category implements Serializable {
                inverseJoinColumns = @JoinColumn(name="products_id", referencedColumnName="id"))
     private Set<Product> products = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // application-needle-entity-add-field - Application will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -166,7 +166,7 @@ public class Category implements Serializable {
     public void setProducts(Set<Product> products) {
         this.products = products;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // application-needle-entity-add-getters-setters - Application will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

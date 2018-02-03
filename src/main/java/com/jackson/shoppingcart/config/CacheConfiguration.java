@@ -52,7 +52,7 @@ public class CacheConfiguration {
             cm.createCache(com.jackson.shoppingcart.domain.Address.class.getName(), jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Cart.class.getName(), jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Cart.class.getName() + ".products", jcacheConfiguration);
-            // jhipster-needle-ehcache-add-entry
+            // application-needle-ehcache-add-entry
         };
     }
 }

@@ -56,7 +56,7 @@ public interface ApplicationDefaults {
             boolean enabled = false;
             String host = "localhost";
             int port = 2003;
-            String prefix = "jhipsterApplication";
+            String prefix = "shoppingcartApplication";
         }
 
         public interface Jmx {

@@ -46,9 +46,9 @@
                 <constraints nullable="true" />
             </column>
 
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+            <!-- jhipster-needle-liquibase-add-column - Application will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="category_product">
             <column name="products_id" type="bigint">
                 <constraints nullable="false"/>
@@ -59,7 +59,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="categories_id, products_id" tableName="category_product"/>
-        
+
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    <!-- jhipster-needle-liquibase-add-changeset - Application will add changesets here, do not remove-->
 </databaseChangeLog>

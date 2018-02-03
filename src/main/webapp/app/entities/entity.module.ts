@@ -5,7 +5,7 @@ import { ShoppingCartProductModule } from './product/product.module';
 import { ShoppingCartCustomerModule } from './customer/customer.module';
 import { ShoppingCartAddressModule } from './address/address.module';
 import { ShoppingCartCartModule } from './cart/cart.module';
-/* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
+/* jhipster-needle-add-entity-module-import - Application will add entity modules imports here */
 
 @NgModule({
     imports: [
@@ -14,7 +14,7 @@ import { ShoppingCartCartModule } from './cart/cart.module';
         ShoppingCartCustomerModule,
         ShoppingCartAddressModule,
         ShoppingCartCartModule,
-        /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
+        /* jhipster-needle-add-entity-module - Application will add entity modules here */
     ],
     declarations: [],
     entryComponents: [],

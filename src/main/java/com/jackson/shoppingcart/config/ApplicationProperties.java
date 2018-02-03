@@ -89,7 +89,7 @@ public class ApplicationProperties {
             private String password;
 
             public Registry() {
-                this.password = io.github.jhipster.config.JHipsterDefaults.Registry.password;
+                this.password = ApplicationDefaults.Registry.password;
             }
 
             public String getPassword() {
@@ -105,7 +105,7 @@ public class ApplicationProperties {
             private String[] displayOnActiveProfiles;
 
             public Ribbon() {
-                this.displayOnActiveProfiles = io.github.jhipster.config.JHipsterDefaults.Ribbon.displayOnActiveProfiles;
+                this.displayOnActiveProfiles = ApplicationDefaults.Ribbon.displayOnActiveProfiles;
             }
 
             public String[] getDisplayOnActiveProfiles() {
@@ -122,7 +122,7 @@ public class ApplicationProperties {
             private Map<String, List<String>> authorizedMicroservicesEndpoints;
 
             public Gateway() {
-                this.authorizedMicroservicesEndpoints = io.github.jhipster.config.JHipsterDefaults.Gateway.authorizedMicroservicesEndpoints;
+                this.authorizedMicroservicesEndpoints = ApplicationDefaults.Gateway.authorizedMicroservicesEndpoints;
             }
 
             public com.jackson.shoppingcart.config.ApplicationProperties.Gateway.RateLimiting getRateLimiting() {
@@ -336,7 +336,7 @@ public class ApplicationProperties {
                 private boolean enabled = false;
                 private String host = "localhost";
                 private int port = 2003;
-                private String prefix = "jhipsterApplication";
+                private String prefix = "shoppingcartApplication";
 
                 public Graphite() {
                 }
@@ -405,15 +405,15 @@ public class ApplicationProperties {
             private String[] protocols;
 
             public Swagger() {
-                this.termsOfServiceUrl = io.github.jhipster.config.JHipsterDefaults.Swagger.termsOfServiceUrl;
-                this.contactName = io.github.jhipster.config.JHipsterDefaults.Swagger.contactName;
-                this.contactUrl = io.github.jhipster.config.JHipsterDefaults.Swagger.contactUrl;
-                this.contactEmail = io.github.jhipster.config.JHipsterDefaults.Swagger.contactEmail;
-                this.license = io.github.jhipster.config.JHipsterDefaults.Swagger.license;
-                this.licenseUrl = io.github.jhipster.config.JHipsterDefaults.Swagger.licenseUrl;
+                this.termsOfServiceUrl = ApplicationDefaults.Swagger.termsOfServiceUrl;
+                this.contactName = ApplicationDefaults.Swagger.contactName;
+                this.contactUrl = ApplicationDefaults.Swagger.contactUrl;
+                this.contactEmail = ApplicationDefaults.Swagger.contactEmail;
+                this.license = ApplicationDefaults.Swagger.license;
+                this.licenseUrl = ApplicationDefaults.Swagger.licenseUrl;
                 this.defaultIncludePattern = "/api/.*";
-                this.host = io.github.jhipster.config.JHipsterDefaults.Swagger.host;
-                this.protocols = io.github.jhipster.config.JHipsterDefaults.Swagger.protocols;
+                this.host = ApplicationDefaults.Swagger.host;
+                this.protocols = ApplicationDefaults.Swagger.protocols;
             }
 
             public String getTitle() {
@@ -538,7 +538,7 @@ public class ApplicationProperties {
                 private String key;
 
                 public RememberMe() {
-                    this.key = io.github.jhipster.config.JHipsterDefaults.Security.RememberMe.key;
+                    this.key = ApplicationDefaults.Security.RememberMe.key;
                 }
 
                 public String getKey() {
@@ -566,7 +566,7 @@ public class ApplicationProperties {
                     private long tokenValidityInSecondsForRememberMe;
 
                     public Jwt() {
-                        this.secret = io.github.jhipster.config.JHipsterDefaults.Security.Authentication.Jwt.secret;
+                        this.secret = ApplicationDefaults.Security.Authentication.Jwt.secret;
                         this.tokenValidityInSeconds = 1800L;
                         this.tokenValidityInSecondsForRememberMe = 2592000L;
                     }
@@ -604,10 +604,10 @@ public class ApplicationProperties {
                 private String clientSecret;
 
                 public ClientAuthorization() {
-                    this.accessTokenUri = io.github.jhipster.config.JHipsterDefaults.Security.ClientAuthorization.accessTokenUri;
-                    this.tokenServiceId = io.github.jhipster.config.JHipsterDefaults.Security.ClientAuthorization.tokenServiceId;
-                    this.clientId = io.github.jhipster.config.JHipsterDefaults.Security.ClientAuthorization.clientId;
-                    this.clientSecret = io.github.jhipster.config.JHipsterDefaults.Security.ClientAuthorization.clientSecret;
+                    this.accessTokenUri = ApplicationDefaults.Security.ClientAuthorization.accessTokenUri;
+                    this.tokenServiceId = ApplicationDefaults.Security.ClientAuthorization.tokenServiceId;
+                    this.clientId = ApplicationDefaults.Security.ClientAuthorization.clientId;
+                    this.clientSecret = ApplicationDefaults.Security.ClientAuthorization.clientSecret;
                 }
 
                 public String getAccessTokenUri() {
