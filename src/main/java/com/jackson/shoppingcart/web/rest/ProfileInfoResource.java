@@ -1,8 +1,7 @@
 package com.jackson.shoppingcart.web.rest;
 
 import com.jackson.shoppingcart.config.DefaultProfileUtil;
-
-import io.github.jhipster.config.JHipsterProperties;
+import com.jackson.shoppingcart.config.ApplicationProperties;
 
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +19,11 @@ public class ProfileInfoResource {
 
     private final Environment env;
 
-    private final JHipsterProperties jHipsterProperties;
+    private final ApplicationProperties applicationProperties;
 
-    public ProfileInfoResource(Environment env, JHipsterProperties jHipsterProperties) {
+    public ProfileInfoResource(Environment env, ApplicationProperties applicationProperties) {
         this.env = env;
-        this.jHipsterProperties = jHipsterProperties;
+        this.applicationProperties = applicationProperties;
     }
 
     @GetMapping("/profile-info")
@@ -34,7 +33,7 @@ public class ProfileInfoResource {
     }
 
     private String getRibbonEnv(String[] activeProfiles) {
-        String[] displayOnActiveProfiles = jHipsterProperties.getRibbon().getDisplayOnActiveProfiles();
+        String[] displayOnActiveProfiles = applicationProperties.getRibbon().getDisplayOnActiveProfiles();
         if (displayOnActiveProfiles == null) {
             return null;
         }
