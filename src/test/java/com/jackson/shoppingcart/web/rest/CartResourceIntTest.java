@@ -3,7 +3,11 @@ package com.jackson.shoppingcart.web.rest;
 import com.jackson.shoppingcart.ShoppingCartApp;
 
 import com.jackson.shoppingcart.domain.Cart;
+import com.jackson.shoppingcart.repository.CartItemRepository;
 import com.jackson.shoppingcart.repository.CartRepository;
+import com.jackson.shoppingcart.repository.CustomerRepository;
+import com.jackson.shoppingcart.repository.ProductRepository;
+import com.jackson.shoppingcart.service.CartItemService;
 import com.jackson.shoppingcart.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -41,11 +45,23 @@ public class CartResourceIntTest {
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_RESTRICTED = false;
-    private static final Boolean UPDATED_RESTRICTED = true;
+    private static final Boolean DEFAULT_COMPLETED = false;
+    private static final Boolean UPDATED_COMPLETED = true;
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private CartItemService cartItemService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -66,7 +82,7 @@ public class CartResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CartResource cartResource = new CartResource(cartRepository);
+        final CartResource cartResource = new CartResource(cartRepository, customerRepository, cartItemRepository, productRepository, cartItemService);
         this.restCartMockMvc = MockMvcBuilders.standaloneSetup(cartResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -83,7 +99,7 @@ public class CartResourceIntTest {
     public static Cart createEntity(EntityManager em) {
         Cart cart = new Cart()
             .title(DEFAULT_TITLE)
-            .restricted(DEFAULT_RESTRICTED);
+            .completed(DEFAULT_COMPLETED);
         return cart;
     }
 
@@ -108,7 +124,7 @@ public class CartResourceIntTest {
         assertThat(cartList).hasSize(databaseSizeBeforeCreate + 1);
         Cart testCart = cartList.get(cartList.size() - 1);
         assertThat(testCart.getTitle()).isEqualTo(DEFAULT_TITLE);
-        assertThat(testCart.isRestricted()).isEqualTo(DEFAULT_RESTRICTED);
+        assertThat(testCart.isCompleted()).isEqualTo(DEFAULT_COMPLETED);
     }
 
     @Test
@@ -160,7 +176,7 @@ public class CartResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cart.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
-            .andExpect(jsonPath("$.[*].restricted").value(hasItem(DEFAULT_RESTRICTED.booleanValue())));
+            .andExpect(jsonPath("$.[*].completed").value(hasItem(DEFAULT_COMPLETED.booleanValue())));
     }
 
     @Test
@@ -175,7 +191,7 @@ public class CartResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cart.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
-            .andExpect(jsonPath("$.restricted").value(DEFAULT_RESTRICTED.booleanValue()));
+            .andExpect(jsonPath("$.completed").value(DEFAULT_COMPLETED.booleanValue()));
     }
 
     @Test
@@ -199,7 +215,7 @@ public class CartResourceIntTest {
         em.detach(updatedCart);
         updatedCart
             .title(UPDATED_TITLE)
-            .restricted(UPDATED_RESTRICTED);
+            .completed(UPDATED_COMPLETED);
 
         restCartMockMvc.perform(put("/api/carts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -211,7 +227,7 @@ public class CartResourceIntTest {
         assertThat(cartList).hasSize(databaseSizeBeforeUpdate);
         Cart testCart = cartList.get(cartList.size() - 1);
         assertThat(testCart.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testCart.isRestricted()).isEqualTo(UPDATED_RESTRICTED);
+        assertThat(testCart.isCompleted()).isEqualTo(UPDATED_COMPLETED);
     }
 
     @Test

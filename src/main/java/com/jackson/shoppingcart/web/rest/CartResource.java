@@ -3,7 +3,14 @@ package com.jackson.shoppingcart.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.jackson.shoppingcart.domain.Cart;
 
+import com.jackson.shoppingcart.domain.CartItem;
+import com.jackson.shoppingcart.domain.Customer;
+import com.jackson.shoppingcart.domain.Product;
+import com.jackson.shoppingcart.repository.CartItemRepository;
 import com.jackson.shoppingcart.repository.CartRepository;
+import com.jackson.shoppingcart.repository.CustomerRepository;
+import com.jackson.shoppingcart.repository.ProductRepository;
+import com.jackson.shoppingcart.service.CartItemService;
 import com.jackson.shoppingcart.web.rest.errors.BadRequestAlertException;
 import com.jackson.shoppingcart.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -32,8 +39,21 @@ public class CartResource {
 
     private final CartRepository cartRepository;
 
-    public CartResource(CartRepository cartRepository) {
+    private final CustomerRepository customerRepository;
+
+    private final CartItemRepository cartItemRepository;
+
+    private final ProductRepository productRepository;
+
+    private final CartItemService cartItemService;
+
+
+    public CartResource(CartRepository cartRepository, CustomerRepository customerRepository, CartItemRepository cartItemRepository, ProductRepository productRepository, CartItemService cartItemService) {
         this.cartRepository = cartRepository;
+        this.customerRepository = customerRepository;
+        this.cartItemRepository = cartItemRepository;
+        this.productRepository = productRepository;
+        this.cartItemService = cartItemService;
     }
 
     /**
@@ -93,7 +113,7 @@ public class CartResource {
     /**
      * GET  /carts/:id : get the "id" cart.
      *
-     * @param id the id of the cart to retrieve
+     * @param id the id of the customer of cart to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the cart, or with status 404 (Not Found)
      */
     @GetMapping("/carts/{id}")
@@ -102,6 +122,20 @@ public class CartResource {
         log.debug("REST request to get Cart : {}", id);
         Cart cart = cartRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(cart));
+    }
+
+    /**
+     * GET  /carts/:id : get the cart items from a customer.
+     *
+     * @param id the id of the customer of cart to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the cart, or with status 404 (Not Found)
+     */
+    @GetMapping("/carts/customer/{id}")
+    @Timed
+    public List<CartItem> getAllCartItemsByCustomer(@PathVariable Long id) {
+        log.debug("REST request to get Cart from customer: {}", id);
+        Customer customer = customerRepository.findOne(id);
+        return cartItemRepository.findAllWithEagerRelationships(customer);
     }
 
     /**
@@ -115,6 +149,44 @@ public class CartResource {
     public ResponseEntity<Void> deleteCart(@PathVariable Long id) {
         log.debug("REST request to delete Cart : {}", id);
         cartRepository.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * POST  /carts : Add item into Cart.
+     *
+     * @param cartId the cart to add item
+     * @return the ResponseEntity with status 201 (Created) and with body the new cart, or with status 400 (Bad Request) if the cart has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/carts/{cartId}/product/{productId}")
+    @Timed
+    public ResponseEntity<CartItem> addItemToCart(@PathVariable Long cartId, @PathVariable Long productId)
+            throws URISyntaxException{
+        log.debug("REST request to add product into Cart : {}", cartId, productId);
+        if (cartId == null || productId == null) {
+            throw new BadRequestAlertException("Cart or Product does not exist", ENTITY_NAME, "idnotexists");
+        }
+
+        Cart cart = cartRepository.findOne(cartId);
+        Product product = productRepository.findOne(productId);
+        CartItem cartItem = cartItemService.addCartItemToCart(cart,product).get();
+        return ResponseEntity.created(new URI("/api/carts/customer/" + cart.getCustomer().getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, cartItem.getId().toString()))
+            .body(cartItem);
+    }
+
+    /**
+     * DELETE  /carts/cartitem/:id : delete the "id" cart.
+     *
+     * @param id the id of the cartitem to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/carts/cartitem/{id}")
+    @Timed
+    public ResponseEntity<Void> deleteCartItem(@PathVariable Long id) {
+        log.debug("REST request to delete CartItem : {}", id);
+        cartItemRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

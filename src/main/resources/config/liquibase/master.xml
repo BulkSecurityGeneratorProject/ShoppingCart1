@@ -10,10 +10,11 @@
     <include file="config/liquibase/changelog/20180203031834_added_entity_Customer.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203031835_added_entity_Address.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203031836_added_entity_Cart.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-changelog - Application will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180203031832_added_entity_constraints_Category.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203031833_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203031835_added_entity_constraints_Address.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180203031836_added_entity_constraints_Cart.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-constraints-changelog - Application will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20180203173300_added_entity_Cart_Item.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180204154900_update_cart_column.xml" relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

@@ -46,12 +46,14 @@ public class CacheConfiguration {
             cm.createCache(com.jackson.shoppingcart.domain.Category.class.getName() + ".products", jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Product.class.getName(), jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Product.class.getName() + ".categories", jcacheConfiguration);
+            cm.createCache(com.jackson.shoppingcart.domain.Product.class.getName() + ".cartItems", jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Customer.class.getName(), jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Customer.class.getName() + ".addresses", jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Customer.class.getName() + ".carts", jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Address.class.getName(), jcacheConfiguration);
             cm.createCache(com.jackson.shoppingcart.domain.Cart.class.getName(), jcacheConfiguration);
-            cm.createCache(com.jackson.shoppingcart.domain.Cart.class.getName() + ".products", jcacheConfiguration);
+            cm.createCache(com.jackson.shoppingcart.domain.Cart.class.getName() + ".cartItems", jcacheConfiguration);
+            cm.createCache(com.jackson.shoppingcart.domain.CartItem.class.getName(), jcacheConfiguration);
             // application-needle-ehcache-add-entry
         };
     }

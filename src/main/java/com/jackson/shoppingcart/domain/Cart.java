@@ -30,13 +30,13 @@ public class Cart implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "jhi_restricted")
-    private Boolean restricted;
+    @Column(name = "completed")
+    private Boolean completed;
 
     @OneToMany(mappedBy = "cart")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Product> products = new HashSet<>();
+    private Set<CartItem> cartItems = new HashSet<>();
 
     @ManyToOne
     private Customer customer;
@@ -63,42 +63,42 @@ public class Cart implements Serializable {
         this.title = title;
     }
 
-    public Boolean isRestricted() {
-        return restricted;
+    public Boolean isCompleted() {
+        return completed;
     }
 
-    public Cart restricted(Boolean restricted) {
-        this.restricted = restricted;
+    public Cart completed(Boolean completed) {
+        this.completed = completed;
         return this;
     }
 
-    public void setRestricted(Boolean restricted) {
-        this.restricted = restricted;
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Set<CartItem> getCartItems() {
+        return cartItems;
     }
 
-    public Cart products(Set<Product> products) {
-        this.products = products;
+    public Cart cartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
         return this;
     }
 
-    public Cart addProduct(Product product) {
-        this.products.add(product);
-        product.setCart(this);
+    public Cart addCartItem(CartItem cartItem) {
+        this.cartItems.add(cartItem);
+        cartItem.setCart(this);
         return this;
     }
 
-    public Cart removeProduct(Product product) {
-        this.products.remove(product);
-        product.setCart(null);
+    public Cart removeCartItem(CartItem cartItem) {
+        this.cartItems.remove(cartItem);
+        cartItem.setCart(null);
         return this;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setCartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public Customer getCustomer() {
@@ -140,7 +140,7 @@ public class Cart implements Serializable {
         return "Cart{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", restricted='" + isRestricted() + "'" +
+            ", completed='" + isCompleted() + "'" +
             "}";
     }
 }

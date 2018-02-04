@@ -46,8 +46,10 @@ public class Product implements Serializable {
     @Column(name = "date_modified")
     private LocalDate dateModified;
 
-    @ManyToOne
-    private Cart cart;
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<CartItem> cartItems = new HashSet<>();
 
     @ManyToMany(mappedBy = "products")
     @JsonIgnore
@@ -141,17 +143,29 @@ public class Product implements Serializable {
         this.dateModified = dateModified;
     }
 
-    public Cart getCart() {
-        return cart;
+    public Set<CartItem> getCartItem() {
+        return cartItems;
     }
 
-    public Product cart(Cart cart) {
-        this.cart = cart;
+    public Product cartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
         return this;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public Product addCartItem(CartItem cartItem) {
+        this.cartItems.add(cartItem);
+        cartItem.setProduct(this);
+        return this;
+    }
+
+    public Product removeCartItem(CartItem cartItem) {
+        this.cartItems.remove(cartItem);
+        cartItem.setProduct(null);
+        return this;
+    }
+
+    public void setCartItem(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public Set<Category> getCategories() {
