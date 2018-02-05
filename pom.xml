@@ -368,12 +368,11 @@
                 <configuration>
                     <rules>
                         <requireMavenVersion>
-                            <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
+                            <message>You are running an older version of Maven. Maven version requires at least ${maven.version}</message>
                             <version>[${maven.version},)</version>
                         </requireMavenVersion>
                         <requireJavaVersion>
-                            <!-- Until JHipster supports JDK 9 -->
-                            <message>You are running an incompatible version of Java. JHipster requires JDK ${java.version}</message>
+                            <message>You are running an incompatible version of Java. JDK version requires ${java.version}</message>
                             <version>[1.8,1.9)</version>
                         </requireJavaVersion>
                     </rules>
@@ -533,9 +532,8 @@
                     <executable>true</executable>
                     <fork>true</fork>
                     <!--
-                    Enable the line below to have remote debugging of your application on port 5005
+                    Enable the line below to have remote debugging of your application on port 5005-->
                     <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
-                    -->
                 </configuration>
             </plugin>
             <plugin>
@@ -872,14 +870,13 @@
                         <artifactId>spring-boot-maven-plugin</artifactId>
                         <version>${spring-boot.version}</version>
                         <configuration>
-                            <mainClass>${start-class}</mainClass>
+                            <mainClass>com.jackson.shoppingcart.ShoppingCartApp</mainClass>
                             <executable>true</executable>
                             <fork>true</fork>
                             <addResources>true</addResources>
                             <!--
-                            Enable the line below to have remote debugging of your application on port 5005
+                            Enable the line below to have remote debugging of your application on port 5005-->
                             <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
-                            -->
                         </configuration>
                     </plugin>
                     <plugin>
