@@ -26,13 +26,13 @@ export class AddressResolvePagingParams implements Resolve<any> {
 
 export const addressRoute: Routes = [
     {
-        path: 'address',
+        path: 'mytest',
         component: AddressComponent,
         resolve: {
             'pagingParams': AddressResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Addresses'
         },
         canActivate: [UserRouteAccessService]
@@ -40,7 +40,7 @@ export const addressRoute: Routes = [
         path: 'address/:id',
         component: AddressDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Addresses'
         },
         canActivate: [UserRouteAccessService]
@@ -52,7 +52,7 @@ export const addressPopupRoute: Routes = [
         path: 'address-new',
         component: AddressPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Addresses'
         },
         canActivate: [UserRouteAccessService],
@@ -62,7 +62,7 @@ export const addressPopupRoute: Routes = [
         path: 'address/:id/edit',
         component: AddressPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Addresses'
         },
         canActivate: [UserRouteAccessService],
@@ -72,7 +72,7 @@ export const addressPopupRoute: Routes = [
         path: 'address/:id/delete',
         component: AddressDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: [],
             pageTitle: 'Addresses'
         },
         canActivate: [UserRouteAccessService],

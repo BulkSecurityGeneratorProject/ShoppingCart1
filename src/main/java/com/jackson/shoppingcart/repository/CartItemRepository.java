@@ -25,6 +25,11 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
             "where c.customer = :customer ")
     List<CartItem> findAllWithEagerRelationships(@Param("customer") Customer customer);
 
+    @Query( "select distinct c.cartItems " +
+        "from Cart c " +
+        "where c.customer = :customer ")
+    Page<CartItem> findAllWithEagerRelationships(@Param("customer") Customer customer, Pageable pageable);
+
     @Query( "select distinct ci " +
         "from CartItem ci " +
         "where ci.cart = :cart and ci.product = :product")

@@ -6,11 +6,8 @@ import {
     ProductService,
     ProductPopupService,
     ProductComponent,
-    ProductDetailComponent,
-    ProductDialogComponent,
-    ProductPopupComponent,
-    ProductDeletePopupComponent,
-    ProductDeleteDialogComponent,
+    ProductAddToCartPopupComponent,
+    ProductAddToCartDialogComponent,
     productRoute,
     productPopupRoute,
 } from './';
@@ -27,18 +24,13 @@ const ENTITY_STATES = [
     ],
     declarations: [
         ProductComponent,
-        ProductDetailComponent,
-        ProductDialogComponent,
-        ProductDeleteDialogComponent,
-        ProductPopupComponent,
-        ProductDeletePopupComponent,
+        ProductAddToCartDialogComponent,
+        ProductAddToCartPopupComponent,
     ],
     entryComponents: [
         ProductComponent,
-        ProductDialogComponent,
-        ProductPopupComponent,
-        ProductDeleteDialogComponent,
-        ProductDeletePopupComponent,
+        ProductAddToCartDialogComponent,
+        ProductAddToCartPopupComponent,
     ],
     providers: [
         ProductService,
@@ -46,4 +38,4 @@ const ENTITY_STATES = [
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ShoppingCartProductModule {}
+export class ShoppingCartShopProductModule {}

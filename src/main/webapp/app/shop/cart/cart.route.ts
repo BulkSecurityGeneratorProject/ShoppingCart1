@@ -3,13 +3,11 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@a
 import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { UserRouteAccessService } from '../../shared';
-import { AddressComponent } from './address.component';
-import { AddressDetailComponent } from './address-detail.component';
-import { AddressPopupComponent } from './address-dialog.component';
-import { AddressDeletePopupComponent } from './address-delete-dialog.component';
+import { CartComponent } from './cart.component';
+import { CartDeletePopupComponent } from './cart-delete-dialog.component';
 
 @Injectable()
-export class AddressResolvePagingParams implements Resolve<any> {
+export class CartResolvePagingParams implements Resolve<any> {
 
     constructor(private paginationUtil: JhiPaginationUtil) {}
 
@@ -24,56 +22,29 @@ export class AddressResolvePagingParams implements Resolve<any> {
     }
 }
 
-export const addressRoute: Routes = [
+export const CartRoute: Routes = [
     {
-        path: 'address',
-        component: AddressComponent,
+        path: 'cart2',
+        component: CartComponent,
         resolve: {
-            'pagingParams': AddressResolvePagingParams
+            'pagingParams': CartResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'Addresses'
-        },
-        canActivate: [UserRouteAccessService]
-    }, {
-        path: 'address/:id',
-        component: AddressDetailComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'Addresses'
+            authorities: [],
+            pageTitle: 'Cart'
         },
         canActivate: [UserRouteAccessService]
     }
 ];
 
-export const addressPopupRoute: Routes = [
+export const CartPopupRoute: Routes = [
+
     {
-        path: 'address-new',
-        component: AddressPopupComponent,
+        path: 'cart/:id/delete',
+        component: CartDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'Addresses'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
-    {
-        path: 'address/:id/edit',
-        component: AddressPopupComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'Addresses'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
-    {
-        path: 'address/:id/delete',
-        component: AddressDeletePopupComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'Addresses'
+            authorities: [],
+            pageTitle: 'Cart'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

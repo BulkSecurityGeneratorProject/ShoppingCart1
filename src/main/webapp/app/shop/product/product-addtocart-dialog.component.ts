@@ -7,12 +7,13 @@ import { JhiEventManager } from 'ng-jhipster';
 import { Product } from './product.model';
 import { ProductPopupService } from './product-popup.service';
 import { ProductService } from './product.service';
+import { User, UserService } from '../../shared';
 
 @Component({
-    selector: 'jhi-product-delete-dialog',
+    selector: 'jhi-product-addtocart-dialog',
     templateUrl: './product-addtocart-dialog.component.html'
 })
-export class ProductDeleteDialogComponent {
+export class ProductAddToCartDialogComponent {
 
     product: Product;
 
@@ -28,10 +29,10 @@ export class ProductDeleteDialogComponent {
     }
 
     confirmAdd(id: number) {
-        this.productService.delete(id).subscribe((response) => {
+        this.productService.addToCart(id).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'productListModification',
-                content: 'Deleted an product'
+                content: 'Added an product'
             });
             this.activeModal.dismiss(true);
         });
@@ -39,10 +40,10 @@ export class ProductDeleteDialogComponent {
 }
 
 @Component({
-    selector: 'jhi-product-delete-popup',
+    selector: 'jhi-product-addtocart-popup',
     template: ''
 })
-export class ProductDeletePopupComponent implements OnInit, OnDestroy {
+export class ProductAddToCartPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
@@ -54,7 +55,7 @@ export class ProductDeletePopupComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             this.productPopupService
-                .open(ProductDeleteDialogComponent as Component, params['id']);
+                .open(ProductAddToCartDialogComponent as Component, params['id']);
         });
     }
 

@@ -9,28 +9,13 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 @Injectable()
 export class CustomerService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/customers';
+    // private resourceUrl =  SERVER_API_URL + 'api/customers';
+    private resourceUrl =  SERVER_API_URL + 'api/carts';
 
     constructor(private http: Http) { }
 
-    create(customer: Customer): Observable<Customer> {
-        const copy = this.convert(customer);
-        return this.http.post(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
-    }
-
-    update(customer: Customer): Observable<Customer> {
-        const copy = this.convert(customer);
-        return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
-    }
-
     find(id: number): Observable<Customer> {
-        return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
+        return this.http.get(`${this.resourceUrl}/cartitem/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
@@ -38,12 +23,12 @@ export class CustomerService {
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
-        return this.http.get(this.resourceUrl, options)
+        return this.http.get(`${this.resourceUrl}/cartitems`, options)
             .map((res: Response) => this.convertResponse(res));
     }
 
     delete(id: number): Observable<Response> {
-        return this.http.delete(`${this.resourceUrl}/${id}`);
+        return this.http.delete(`${this.resourceUrl}/cartitem/${id}`);
     }
 
     private convertResponse(res: Response): ResponseWrapper {

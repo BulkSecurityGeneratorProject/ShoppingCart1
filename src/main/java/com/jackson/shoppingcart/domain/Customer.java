@@ -47,6 +47,10 @@ public class Customer implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Cart> carts = new HashSet<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
+
     // application-needle-entity-add-field - Application will add fields here, do not remove
     public Long getId() {
         return id;
@@ -152,6 +156,14 @@ public class Customer implements Serializable {
         this.carts.remove(cart);
         cart.setCustomer(null);
         return this;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setCarts(Set<Cart> carts) {

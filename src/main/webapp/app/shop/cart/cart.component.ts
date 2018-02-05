@@ -3,18 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Address } from './address.model';
-import { AddressService } from './address.service';
+import { Cart } from './cart.model';
+import { CartService } from './cart.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 
 @Component({
-    selector: 'jhi-address',
-    templateUrl: './address.component.html'
+    selector: 'jhi-cart',
+    templateUrl: './cart.component.html'
 })
-export class AddressComponent implements OnInit, OnDestroy {
+export class CartComponent implements OnInit, OnDestroy {
 
 currentAccount: any;
-    addresses: Address[];
+    carts: Cart[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -29,7 +29,7 @@ currentAccount: any;
     reverse: any;
 
     constructor(
-        private addressService: AddressService,
+        private cartService: CartService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -47,7 +47,7 @@ currentAccount: any;
     }
 
     loadAll() {
-        this.addressService.query({
+        this.cartService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()}).subscribe(
@@ -62,7 +62,7 @@ currentAccount: any;
         }
     }
     transition() {
-        this.router.navigate(['/address'], {queryParams:
+        this.router.navigate(['/cart'], {queryParams:
             {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -74,7 +74,7 @@ currentAccount: any;
 
     clear() {
         this.page = 0;
-        this.router.navigate(['/address', {
+        this.router.navigate(['/cart', {
             page: this.page,
             sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
         }]);
@@ -85,18 +85,18 @@ currentAccount: any;
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.registerChangeInAddresses();
+        this.registerChangeInCarts();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: Address) {
+    trackId(index: number, item: Cart) {
         return item.id;
     }
-    registerChangeInAddresses() {
-        this.eventSubscriber = this.eventManager.subscribe('addressListModification', (response) => this.loadAll());
+    registerChangeInCarts() {
+        this.eventSubscriber = this.eventManager.subscribe('cartListModification', (response) => this.loadAll());
     }
 
     sort() {
@@ -112,7 +112,7 @@ currentAccount: any;
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.addresses = data;
+        this.carts = data;
     }
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);

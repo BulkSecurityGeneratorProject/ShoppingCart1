@@ -3,33 +3,17 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
-import { Address } from './address.model';
+import { Cart } from './cart.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
 @Injectable()
-export class AddressService {
+export class CartService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/addresses';
+    private resourceUrl =  SERVER_API_URL + 'api/carts';
 
     constructor(private http: Http) { }
 
-    create(address: Address): Observable<Address> {
-        const copy = this.convert(address);
-        return this.http.post(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
-    }
-
-    update(address: Address): Observable<Address> {
-        const copy = this.convert(address);
-        return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
-    }
-
-    find(id: number): Observable<Address> {
+    find(id: number): Observable<Cart> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
@@ -56,18 +40,11 @@ export class AddressService {
     }
 
     /**
-     * Convert a returned JSON object to Address.
+     * Convert a returned JSON object to CartItem.
      */
-    private convertItemFromServer(json: any): Address {
-        const entity: Address = Object.assign(new Address(), json);
+    private convertItemFromServer(json: any): Cart {
+        const entity: Cart = Object.assign(new Cart(), json);
         return entity;
     }
 
-    /**
-     * Convert a Address to a JSON which can be sent to the server.
-     */
-    private convert(address: Address): Address {
-        const copy: Address = Object.assign({}, address);
-        return copy;
-    }
 }

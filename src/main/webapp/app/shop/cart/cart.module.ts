@@ -3,22 +3,18 @@ import { RouterModule } from '@angular/router';
 
 import { ShoppingCartSharedModule } from '../../shared';
 import {
-    AddressService,
-    AddressPopupService,
-    AddressComponent,
-    AddressDetailComponent,
-    AddressDialogComponent,
-    AddressPopupComponent,
-    AddressDeletePopupComponent,
-    AddressDeleteDialogComponent,
-    addressRoute,
-    addressPopupRoute,
-    AddressResolvePagingParams,
+    CartService,
+    CartPopupService,
+    CartComponent,
+    CartDeletePopupComponent,
+    CartDeleteDialogComponent,
+    CartRoute,
+    CartPopupRoute,
 } from './';
 
 const ENTITY_STATES = [
-    ...addressRoute,
-    ...addressPopupRoute,
+    ...CartRoute,
+    ...CartPopupRoute,
 ];
 
 @NgModule({
@@ -27,25 +23,19 @@ const ENTITY_STATES = [
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [
-        AddressComponent,
-        AddressDetailComponent,
-        AddressDialogComponent,
-        AddressDeleteDialogComponent,
-        AddressPopupComponent,
-        AddressDeletePopupComponent,
+        CartComponent,
+        CartDeleteDialogComponent,
+        CartDeletePopupComponent,
     ],
     entryComponents: [
-        AddressComponent,
-        AddressDialogComponent,
-        AddressPopupComponent,
-        AddressDeleteDialogComponent,
-        AddressDeletePopupComponent,
+        CartComponent,
+        CartDeleteDialogComponent,
+        CartDeletePopupComponent,
     ],
     providers: [
-        AddressService,
-        AddressPopupService,
-        AddressResolvePagingParams,
+        CartService,
+        CartPopupService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ShoppingCartAddressModule {}
+export class ShoppingCartCartModule {}

@@ -15,14 +15,19 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity CartItem.
+        Added the relationship on customer and user
     -->
-    <changeSet id="20180203173300-1" author="jackson">
-        <renameColumn
-                      columnDataType="bit"
-                      newColumnName="completed"
-                      oldColumnName="jhi_restricted"
-                      tableName="cart"/>
+    <changeSet id="20180204174200-1" author="jackson">
+        <addColumn tableName="customer">
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="customer"
+                                 constraintName="fk_customer_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
 
     </changeSet>
 </databaseChangeLog>

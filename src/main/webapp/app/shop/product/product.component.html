@@ -21,9 +21,6 @@
             <th jhiSortBy="keywords"><span>Keywords</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="rating"><span>Rating</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="dateAdded"><span>Date Added</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="dateModified"><span>Date Modified</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="cart.id"><span>Cart</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -34,36 +31,15 @@
                 <td>{{product.keywords}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.rating}}</td>
-                <td>{{product.dateAdded | date:'mediumDate'}}</td>
-                <td>{{product.dateModified | date:'mediumDate'}}</td>
-                <td>
-                    <div *ngIf="product.cart">
-                        <a [routerLink]="['../cart', product.cart?.id ]" >{{product.cart?.id}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../product', product.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/addtocart'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="fa fa-plus"></span>
+                            <span class="d-none d-md-inline">Add</span>
                         </button>
                     </div>
                 </td>

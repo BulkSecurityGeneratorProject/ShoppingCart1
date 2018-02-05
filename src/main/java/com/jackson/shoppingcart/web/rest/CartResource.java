@@ -1,21 +1,21 @@
 package com.jackson.shoppingcart.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.jackson.shoppingcart.domain.Cart;
+import com.jackson.shoppingcart.domain.*;
 
-import com.jackson.shoppingcart.domain.CartItem;
-import com.jackson.shoppingcart.domain.Customer;
-import com.jackson.shoppingcart.domain.Product;
-import com.jackson.shoppingcart.repository.CartItemRepository;
-import com.jackson.shoppingcart.repository.CartRepository;
-import com.jackson.shoppingcart.repository.CustomerRepository;
-import com.jackson.shoppingcart.repository.ProductRepository;
+import com.jackson.shoppingcart.repository.*;
+import com.jackson.shoppingcart.security.SecurityUtils;
 import com.jackson.shoppingcart.service.CartItemService;
 import com.jackson.shoppingcart.web.rest.errors.BadRequestAlertException;
 import com.jackson.shoppingcart.web.rest.util.HeaderUtil;
+import com.jackson.shoppingcart.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,14 +45,17 @@ public class CartResource {
 
     private final ProductRepository productRepository;
 
+    private final UserRepository userRepository;
+
     private final CartItemService cartItemService;
 
 
-    public CartResource(CartRepository cartRepository, CustomerRepository customerRepository, CartItemRepository cartItemRepository, ProductRepository productRepository, CartItemService cartItemService) {
+    public CartResource(CartRepository cartRepository, CustomerRepository customerRepository, CartItemRepository cartItemRepository, ProductRepository productRepository, UserRepository userRepository, CartItemService cartItemService) {
         this.cartRepository = cartRepository;
         this.customerRepository = customerRepository;
         this.cartItemRepository = cartItemRepository;
         this.productRepository = productRepository;
+        this.userRepository = userRepository;
         this.cartItemService = cartItemService;
     }
 
@@ -139,6 +142,36 @@ public class CartResource {
     }
 
     /**
+     * GET  /carts/:id : get the cart items from a user (customer).
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and with body the cart, or with status 404 (Not Found)
+     */
+    @GetMapping("/carts/cartitems")
+    @Timed
+    public ResponseEntity<List<CartItem>> getAllCartItemsByUser(Pageable pageable) {
+        log.debug("REST request to get Cart from login user: {}");
+        Optional<String> o = SecurityUtils.getCurrentUserLogin();
+        User u = userRepository.findOneByLogin(o.get()).get();
+        Page<CartItem> page = cartItemRepository.findAllWithEagerRelationships(u.getCustomer(), pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/carts/cartitems");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /carts/:id : get the cart items from a user (customer).
+     * @return the ResponseEntity with status 200 (OK) and with body the cart, or with status 404 (Not Found)
+     */
+    @GetMapping("/carts/cartitems/nopage")
+    @Timed
+    public List<CartItem> getAllCartItemsByUser() {
+        log.debug("REST request to get Cart from login user: {}");
+        Optional<String> o = SecurityUtils.getCurrentUserLogin();
+        User u = userRepository.findOneByLogin(o.get()).get();
+        return cartItemRepository.findAllWithEagerRelationships(u.getCustomer());
+    }
+
+    /**
      * DELETE  /carts/:id : delete the "id" cart.
      *
      * @param id the id of the cart to delete
@@ -155,20 +188,21 @@ public class CartResource {
     /**
      * POST  /carts : Add item into Cart.
      *
-     * @param cartId the cart to add item
+     * @param productId the product to add into cart
      * @return the ResponseEntity with status 201 (Created) and with body the new cart, or with status 400 (Bad Request) if the cart has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/carts/{cartId}/product/{productId}")
+    @PostMapping("/carts/product/{productId}")
     @Timed
-    public ResponseEntity<CartItem> addItemToCart(@PathVariable Long cartId, @PathVariable Long productId)
+    public ResponseEntity<CartItem> addItemToCart(@PathVariable Long productId)
             throws URISyntaxException{
-        log.debug("REST request to add product into Cart : {}", cartId, productId);
-        if (cartId == null || productId == null) {
+        log.debug("REST request to add product into Cart : {}", productId);
+        Optional<String> o = SecurityUtils.getCurrentUserLogin();
+        User u = userRepository.findOneByLogin(o.get()).get();
+        Cart cart =  cartRepository.findOneByCustomer(u.getCustomer()).get();
+        if (cart == null || productId == null) {
             throw new BadRequestAlertException("Cart or Product does not exist", ENTITY_NAME, "idnotexists");
         }
-
-        Cart cart = cartRepository.findOne(cartId);
         Product product = productRepository.findOne(productId);
         CartItem cartItem = cartItemService.addCartItemToCart(cart,product).get();
         return ResponseEntity.created(new URI("/api/carts/customer/" + cart.getCustomer().getId()))
@@ -188,5 +222,19 @@ public class CartResource {
         log.debug("REST request to delete CartItem : {}", id);
         cartItemRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /carts/cartitem/:id : get the "id" cartItem.
+     *
+     * @param id the id of the cartitem to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the product, or with status 404 (Not Found)
+     */
+    @GetMapping("/carts/cartitem/{id}")
+    @Timed
+    public ResponseEntity<CartItem> getCartItem(@PathVariable Long id) {
+        log.debug("REST request to get Product : {}", id);
+        CartItem cartItem = cartItemRepository.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(cartItem));
     }
 }

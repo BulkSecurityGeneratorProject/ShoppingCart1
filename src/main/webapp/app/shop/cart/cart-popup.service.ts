@@ -1,17 +1,17 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Address } from './address.model';
-import { AddressService } from './address.service';
+import { Cart } from './cart.model';
+import { CartService } from './cart.service';
 
 @Injectable()
-export class AddressPopupService {
+export class CartPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
         private modalService: NgbModal,
         private router: Router,
-        private addressService: AddressService
+        private cartService: CartService
 
     ) {
         this.ngbModalRef = null;
@@ -25,23 +25,23 @@ export class AddressPopupService {
             }
 
             if (id) {
-                this.addressService.find(id).subscribe((address) => {
-                    this.ngbModalRef = this.addressModalRef(component, address);
+                this.cartService.find(id).subscribe((cart) => {
+                    this.ngbModalRef = this.cartModalRef(component, cart);
                     resolve(this.ngbModalRef);
                 });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
-                    this.ngbModalRef = this.addressModalRef(component, new Address());
+                    this.ngbModalRef = this.cartModalRef(component, new Cart());
                     resolve(this.ngbModalRef);
                 }, 0);
             }
         });
     }
 
-    addressModalRef(component: Component, address: Address): NgbModalRef {
+    cartModalRef(component: Component, cart: Cart): NgbModalRef {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
-        modalRef.componentInstance.address = address;
+        modalRef.componentInstance.cart = cart;
         modalRef.result.then((result) => {
             this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true, queryParamsHandling: 'merge' });
             this.ngbModalRef = null;

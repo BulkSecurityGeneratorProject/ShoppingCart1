@@ -7,11 +7,13 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { Product } from './product.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
+import { User, UserService } from '../../shared';
 
 @Injectable()
 export class ProductService {
 
     private resourceUrl =  SERVER_API_URL + 'api/products';
+    private cartsUrl =  SERVER_API_URL + 'api/carts';
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
@@ -46,6 +48,13 @@ export class ProductService {
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
+    }
+
+    addToCart(id: number): Observable<Product> {
+        return this.http.post(`${this.cartsUrl}/product/${id}`, '').map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
     }
 
     private convertResponse(res: Response): ResponseWrapper {

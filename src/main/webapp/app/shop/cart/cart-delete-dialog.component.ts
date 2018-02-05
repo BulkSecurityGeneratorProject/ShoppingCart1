@@ -4,20 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { Address } from './address.model';
-import { AddressPopupService } from './address-popup.service';
-import { AddressService } from './address.service';
+import { Cart } from './cart.model';
+import { CartPopupService } from './cart-popup.service';
+import { CartService } from './cart.service';
 
 @Component({
-    selector: 'jhi-address-delete-dialog',
-    templateUrl: './address-delete-dialog.component.html'
+    selector: 'jhi-cart-delete-dialog',
+    templateUrl: './cart-delete-dialog.component.html'
 })
-export class AddressDeleteDialogComponent {
+export class CartDeleteDialogComponent {
 
-    address: Address;
+    cart: Cart;
 
     constructor(
-        private addressService: AddressService,
+        private cartService: CartService,
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager
     ) {
@@ -28,10 +28,10 @@ export class AddressDeleteDialogComponent {
     }
 
     confirmDelete(id: number) {
-        this.addressService.delete(id).subscribe((response) => {
+        this.cartService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
-                name: 'addressListModification',
-                content: 'Deleted an address'
+                name: 'cartListModification',
+                content: 'Deleted an cart'
             });
             this.activeModal.dismiss(true);
         });
@@ -39,22 +39,22 @@ export class AddressDeleteDialogComponent {
 }
 
 @Component({
-    selector: 'jhi-address-delete-popup',
+    selector: 'jhi-cart-delete-popup',
     template: ''
 })
-export class AddressDeletePopupComponent implements OnInit, OnDestroy {
+export class CartDeletePopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
-        private addressPopupService: AddressPopupService
+        private cartPopupService: CartPopupService
     ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
-            this.addressPopupService
-                .open(AddressDeleteDialogComponent as Component, params['id']);
+            this.cartPopupService
+                .open(CartDeleteDialogComponent as Component, params['id']);
         });
     }
 

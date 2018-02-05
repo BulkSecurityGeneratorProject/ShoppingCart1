@@ -3,10 +3,7 @@ package com.jackson.shoppingcart.web.rest;
 import com.jackson.shoppingcart.ShoppingCartApp;
 
 import com.jackson.shoppingcart.domain.Cart;
-import com.jackson.shoppingcart.repository.CartItemRepository;
-import com.jackson.shoppingcart.repository.CartRepository;
-import com.jackson.shoppingcart.repository.CustomerRepository;
-import com.jackson.shoppingcart.repository.ProductRepository;
+import com.jackson.shoppingcart.repository.*;
 import com.jackson.shoppingcart.service.CartItemService;
 import com.jackson.shoppingcart.web.rest.errors.ExceptionTranslator;
 
@@ -61,6 +58,9 @@ public class CartResourceIntTest {
     private ProductRepository productRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private CartItemService cartItemService;
 
     @Autowired
@@ -79,10 +79,13 @@ public class CartResourceIntTest {
 
     private Cart cart;
 
+    public CartResourceIntTest() {
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CartResource cartResource = new CartResource(cartRepository, customerRepository, cartItemRepository, productRepository, cartItemService);
+        final CartResource cartResource = new CartResource(cartRepository, customerRepository, cartItemRepository, productRepository, userRepository, cartItemService);
         this.restCartMockMvc = MockMvcBuilders.standaloneSetup(cartResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
