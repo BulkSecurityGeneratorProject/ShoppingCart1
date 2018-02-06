@@ -50,8 +50,8 @@ export class ProductService {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }
 
-    addToCart(id: number): Observable<Product> {
-        return this.http.post(`${this.cartsUrl}/product/${id}`, '').map((res: Response) => {
+    addToCart(id: number, quantity: number): Observable<Product> {
+        return this.http.post(`${this.cartsUrl}/product/${id}/${quantity}`, '').map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });

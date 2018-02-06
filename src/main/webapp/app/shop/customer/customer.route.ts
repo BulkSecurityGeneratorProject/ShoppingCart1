@@ -5,6 +5,7 @@ import { JhiPaginationUtil } from 'ng-jhipster';
 import { UserRouteAccessService } from '../../shared';
 import { CustomerComponent } from './customer.component';
 import { CustomerDeletePopupComponent } from './customer-delete-dialog.component';
+import { CustomerPopupComponent } from './customer-dialog.component';
 
 @Injectable()
 export class CustomerResolvePagingParams implements Resolve<any> {
@@ -47,5 +48,15 @@ export const customerPopupRoute: Routes = [
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
-    }
+    },
+    {
+        path: 'mycartcomplete',
+        component: CustomerPopupComponent,
+        data: {
+            authorities: [],
+            pageTitle: 'Customers'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
 ];

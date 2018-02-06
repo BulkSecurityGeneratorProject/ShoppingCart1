@@ -28,8 +28,8 @@ export class ProductAddToCartDialogComponent {
         this.activeModal.dismiss('cancel');
     }
 
-    confirmAdd(id: number) {
-        this.productService.addToCart(id).subscribe((response) => {
+    confirmAdd(id: number, quantity: number) {
+        this.productService.addToCart(id, quantity).subscribe((response) => {
             this.eventManager.broadcast({
                 name: 'productListModification',
                 content: 'Added an product'

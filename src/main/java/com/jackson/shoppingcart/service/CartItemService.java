@@ -58,18 +58,18 @@ public class CartItemService {
      * @return the list of entities
      */
     @Transactional(readOnly = false)
-    public Optional<CartItem> addCartItemToCart(Cart cart, Product product) {
+    public Optional<CartItem> addCartItemToCart(Cart cart, Product product, Integer quantity) {
         log.debug("Add an Cart Item into Cart");
         CartItem cartItem;
         Optional<CartItem> c = cartItemRepository.findOneByCartAndProduct(cart, product);
         if (c.isPresent()) {
-            c.get().setQuantity(c.get().getQuantity()+1);
+            c.get().setQuantity(c.get().getQuantity()+quantity);
             cartItem = c.get();
         } else {
             cartItem = new CartItem();
             cartItem.setCart(cart);
             cartItem.setProduct(product);
-            cartItem.setQuantity(1);
+            cartItem.setQuantity(quantity);
             cartItem.setPurchasedPrice(399.99);
         }
         cartItem = cartItemRepository.save(cartItem);

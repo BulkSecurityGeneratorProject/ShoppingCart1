@@ -11,6 +11,7 @@ export class Product implements BaseEntity {
         public dateModified?: any,
         public cart?: BaseEntity,
         public categories?: BaseEntity[],
+        public quantity?: number,
     ) {
     }
 }

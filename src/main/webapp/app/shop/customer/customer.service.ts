@@ -31,6 +31,10 @@ export class CustomerService {
         return this.http.delete(`${this.resourceUrl}/cartitem/${id}`);
     }
 
+    submitCart(): Observable<Response> {
+        return this.http.get(`${this.resourceUrl}/completed`);
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];

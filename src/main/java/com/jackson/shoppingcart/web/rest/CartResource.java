@@ -7,6 +7,7 @@ import com.jackson.shoppingcart.repository.*;
 import com.jackson.shoppingcart.security.SecurityUtils;
 import com.jackson.shoppingcart.service.CartItemService;
 import com.jackson.shoppingcart.web.rest.errors.BadRequestAlertException;
+import com.jackson.shoppingcart.web.rest.errors.InvalidPasswordException;
 import com.jackson.shoppingcart.web.rest.util.HeaderUtil;
 import com.jackson.shoppingcart.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -189,12 +190,13 @@ public class CartResource {
      * POST  /carts : Add item into Cart.
      *
      * @param productId the product to add into cart
+     * @param quantity the product to add into cart
      * @return the ResponseEntity with status 201 (Created) and with body the new cart, or with status 400 (Bad Request) if the cart has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/carts/product/{productId}")
+    @PostMapping("/carts/product/{productId}/{quantity}")
     @Timed
-    public ResponseEntity<CartItem> addItemToCart(@PathVariable Long productId)
+    public ResponseEntity<CartItem> addItemToCart(@PathVariable Long productId, @PathVariable Integer quantity)
             throws URISyntaxException{
         log.debug("REST request to add product into Cart : {}", productId);
         Optional<String> o = SecurityUtils.getCurrentUserLogin();
@@ -204,9 +206,9 @@ public class CartResource {
             throw new BadRequestAlertException("Cart or Product does not exist", ENTITY_NAME, "idnotexists");
         }
         Product product = productRepository.findOne(productId);
-        CartItem cartItem = cartItemService.addCartItemToCart(cart,product).get();
+        CartItem cartItem = cartItemService.addCartItemToCart(cart,product,quantity).get();
         return ResponseEntity.created(new URI("/api/carts/customer/" + cart.getCustomer().getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, cartItem.getId().toString()))
+            .headers(HeaderUtil.createEntityAddedAlert(ENTITY_NAME, productId.toString()))
             .body(cartItem);
     }
 
@@ -236,5 +238,22 @@ public class CartResource {
         log.debug("REST request to get Product : {}", id);
         CartItem cartItem = cartItemRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(cartItem));
+    }
+
+    /**
+     * Get  /carts/checkout : changes the cart status to completed
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the product, or with status 404 (Not Found)
+     */
+    @GetMapping(path = "/carts/completed")
+    @Timed
+    public ResponseEntity<Cart> completedCart() {
+        log.debug("REST request to complete a cart: {}");
+        Optional<String> o = SecurityUtils.getCurrentUserLogin();
+        User u = userRepository.findOneByLogin(o.get()).get();
+        Cart cart =  cartRepository.findOneByCustomer(u.getCustomer()).get();
+        cart.setCompleted(true);
+        cart = cartRepository.save(cart);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(cart));
     }
 }

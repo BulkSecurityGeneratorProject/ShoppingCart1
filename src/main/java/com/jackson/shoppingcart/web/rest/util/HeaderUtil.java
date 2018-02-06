@@ -40,4 +40,8 @@ public final class HeaderUtil {
         headers.add("X-shoppingCartApp-params", entityName);
         return headers;
     }
+
+    public static HttpHeaders createEntityAddedAlert(String entityName, String param) {
+        return createAlert("A " + entityName + " is updated with item " + param, param);
+    }
 }
